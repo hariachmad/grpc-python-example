@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package audio;
+
+message AudioRequest{
+    bytes opus_data = 1;
+    uint32 sample_rate = 2;
+    uint32 channels = 3;
+}
+
+message AudioResponse{
+    string status = 1;
+}
+
+service AudioService {
+    rpc SendAudio (AudioRequest) returns (AudioResponse);
+}
