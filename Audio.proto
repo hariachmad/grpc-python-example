@@ -10,6 +10,9 @@ message AudioRequest{
 
 message AudioResponse{
     string status = 1;
+    bytes opus_data = 2;
+    uint32 sample_rate = 3;
+    uint32 channels = 4;
 }
 
 service AudioService {

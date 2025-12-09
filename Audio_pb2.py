@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x41udio.proto\x12\x05\x61udio\"H\n\x0c\x41udioRequest\x12\x11\n\topus_data\x18\x01 \x01(\x0c\x12\x13\n\x0bsample_rate\x18\x02 \x01(\r\x12\x10\n\x08\x63hannels\x18\x03 \x01(\r\"\x1f\n\rAudioResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2F\n\x0c\x41udioService\x12\x36\n\tSendAudio\x12\x13.audio.AudioRequest\x1a\x14.audio.AudioResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x41udio.proto\x12\x05\x61udio\"H\n\x0c\x41udioRequest\x12\x11\n\topus_data\x18\x01 \x01(\x0c\x12\x13\n\x0bsample_rate\x18\x02 \x01(\r\x12\x10\n\x08\x63hannels\x18\x03 \x01(\r\"Y\n\rAudioResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\x12\x11\n\topus_data\x18\x02 \x01(\x0c\x12\x13\n\x0bsample_rate\x18\x03 \x01(\r\x12\x10\n\x08\x63hannels\x18\x04 \x01(\r2F\n\x0c\x41udioService\x12\x36\n\tSendAudio\x12\x13.audio.AudioRequest\x1a\x14.audio.AudioResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -34,7 +34,7 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_AUDIOREQUEST']._serialized_start=22
   _globals['_AUDIOREQUEST']._serialized_end=94
   _globals['_AUDIORESPONSE']._serialized_start=96
-  _globals['_AUDIORESPONSE']._serialized_end=127
-  _globals['_AUDIOSERVICE']._serialized_start=129
-  _globals['_AUDIOSERVICE']._serialized_end=199
+  _globals['_AUDIORESPONSE']._serialized_end=185
+  _globals['_AUDIOSERVICE']._serialized_start=187
+  _globals['_AUDIOSERVICE']._serialized_end=257
 # @@protoc_insertion_point(module_scope)

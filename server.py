@@ -4,6 +4,7 @@ from concurrent import futures
 import Audio_pb2
 import Audio_pb2_grpc
 import subprocess
+import ffmpeg
 
 
 class AudioService(Audio_pb2_grpc.AudioServiceServicer):
@@ -16,18 +17,34 @@ class AudioService(Audio_pb2_grpc.AudioServiceServicer):
         print("Sample Rate:", sample_rate)
         print("Channels:", channels)
         
-        with open("temp.opus", "wb") as f:
+        with open("temp_input_recorded.opus", "wb") as f:
             f.write(opus_data)
         
         subprocess.run([
-            "ffmpeg", "-y", "-i", "temp.opus",
+            "ffmpeg", "-y", "-i", "temp_input_recorded.opus",
             "-ar", str(sample_rate), "-ac", str(channels),
-            "output_server.wav"
+            "output_recorded.wav"
         ], check=True)
 
-        print("File WAV berhasil dibuat: output.wav")
+        print("File WAV berhasil dibuat: output_recorded.wav")
 
-        return Audio_pb2.AudioResponse(status="received")
+        print("Generate Response...")
+
+        input_file = "input_reply.wav"
+        output_file = "output_reply.opus"
+        opus_frames = None
+
+        (
+        ffmpeg
+        .input(input_file)
+        .output(output_file, acodec='libopus')
+        .run()
+        )
+
+        with open(output_file, "rb") as f:
+            opus_frames = f.read()
+
+        return Audio_pb2.AudioResponse(status="OK", opus_data=opus_frames, sample_rate=48000, channels=1)
 
 
 def serve():

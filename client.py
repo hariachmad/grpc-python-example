@@ -2,16 +2,15 @@ import grpc
 
 import Audio_pb2
 import Audio_pb2_grpc
-import wave
 import ffmpeg
+import subprocess
 
 
 def send_audio():
     channel = grpc.insecure_channel("localhost:50051")
     stub = Audio_pb2_grpc.AudioServiceStub(channel)
-    path =  "./recorded.wav"
-    input_file = "recorded.wav"
-    output_file = "output.opus"
+    input_file = "input_recorded.wav"
+    output_file = "output_recorded.opus"
     opus_frames = None
 
     (
@@ -32,6 +31,16 @@ def send_audio():
 
     response = stub.SendAudio(request)
     print("Server respond:", response.status)
+    print("Writing response file")
+    with open("temp_output_reply.opus", "wb") as f:
+        f.write(response.opus_data)
+    
+    subprocess.run([
+            "ffmpeg", "-y", "-i", "temp_output_reply.opus",
+            "-ar", str(response.sample_rate), "-ac", str(response.channels),
+            "output_reply.wav"
+        ], check=True)
+
 
 
 if __name__ == "__main__":
